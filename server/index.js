@@ -15,7 +15,7 @@ app.get("/balance/:address", (req, res) => {
 });
 
 app.post("/send", (req, res) => {
-  const { sender, recipient, amount } = req.body;
+  const { sender, recipient, amount, signature, recoveryBit } = req.body;
 
   setInitialBalance(sender);
   setInitialBalance(recipient);
