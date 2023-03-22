@@ -29,7 +29,7 @@ function Transfer({ address, privateKey, setBalance }) {
       const {
         data: { balance },
       } = await server.post(`send`, {
-        ...message,
+        message,
         signature,
         recoveryBit,
       });
