@@ -4,13 +4,17 @@ import { keccak256 } from "ethereum-cryptography/keccak";
 import { toHex } from "ethereum-cryptography/utils"
 import { useState } from "react";
 
-function Wallet({ address, setAddress, balance, setBalance, setPrivateKey }) {
+function publicKeyToAddress(publicKey) {
+  return toHex(keccak256(publicKey.slice(1)).slice(-20))
+}
+
+function Wallet({address, setAddress , balance, setBalance, setPrivateKey}) {
   const [publicKey, setPublicKey] = useState(new Uint8Array());
 
   async function onChange(evt) {
     const privateKey = evt.target.value.toString();
     const publicKey = getPublicKey(privateKey);
-    const address = toHex(keccak256(publicKey.slice(1)).slice(-20));
+    const address = publicKeyToAddress(publicKey);
 
     setPublicKey(publicKey)
     setAddress(address)
